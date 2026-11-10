@@ -8,6 +8,9 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
   <!-- Vazirmatn Font -->
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
   <!-- فایل استایل اختصاصی CSS -->
@@ -15,55 +18,84 @@
 </head>
 <body class="pb-10 min-h-screen">
 
-  <!-- Header -->
-  <header class="sticky top-0 z-50 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border-b border-black/5 px-4 py-3">
-    <div class="max-w-md mx-auto">
-      <h1 class="text-xl font-bold text-center text-zinc-800 dark:text-zinc-100">قفسه</h1>
+  <!-- Header (Sticky on Top) -->
+  <header class="sticky top-0 z-50 backdrop-blur-md border-b px-4 py-3" style="background-color: var(--header-bg); border-color: var(--border);">
+    <div class="max-w-md mx-auto flex justify-between items-center relative">
+      
+      <!-- Right: Dark/Light Toggle Button -->
+      <button onclick="toggleDarkMode()" class="w-10 h-10 flex items-center justify-center rounded-full border transition-all active:scale-95 shadow-sm" style="background-color: var(--card); border-color: var(--border); color: var(--text);">
+        <svg id="theme-icon-svg" class="w-5 h-5 theme-icon-smooth" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path id="theme-path" stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
+      <!-- Center: Title -->
+      <h1 class="text-xl font-bold absolute right-1/2 translate-x-1/2" style="color: var(--text);">قفسه</h1>
+
+      <!-- Left: Plus (+) Menu Toggle Button -->
+      <div class="relative">
+        <button id="plus-btn" onclick="togglePlusMenu()" class="w-10 h-10 flex items-center justify-center rounded-full border font-bold text-xl transition-all active:scale-95 shadow-sm" style="background-color: var(--card); border-color: var(--border); color: var(--text);">
+          <span class="plus-icon">+</span>
+        </button>
+
+        <!-- Animated Dropdown Menu -->
+        <div id="plus-menu" class="menu-dropdown menu-hidden absolute left-0 mt-3 w-52 rounded-2xl border shadow-2xl py-2 z-50 text-xs font-medium" style="background-color: var(--card); border-color: var(--border); color: var(--text);">
+          <a href="https://yourwebsite.com" target="_blank" class="flex items-center px-4 py-3 hover:opacity-80 border-b border-black/5 dark:border-white/5 transition">موقعنا الإلكتروني</a>
+          <a href="#" onclick="alert('قفسه: مكتبة رقمية متقدمة...'); return false;" class="flex items-center px-4 py-3 hover:opacity-80 border-b border-black/5 dark:border-white/5 transition">عن قفسه</a>
+          <a href="https://instagram.com" target="_blank" class="flex items-center px-4 py-3 hover:opacity-80 border-b border-black/5 dark:border-white/5 transition">إنستغرام</a>
+          <a href="https://tiktok.com" target="_blank" class="flex items-center px-4 py-3 hover:opacity-80 border-b border-black/5 dark:border-white/5 transition">تيك توك</a>
+          <a href="#" onclick="alert('الأسئلة الشائعة قيد التحديث.'); return false;" class="flex items-center px-4 py-3 hover:opacity-80 transition">الأسئلة الشائعة</a>
+        </div>
+      </div>
+
     </div>
   </header>
 
   <main class="max-w-md mx-auto px-4 mt-4 space-y-4">
     
-    <!-- Filter & Search Bar Section -->
-    <div class="space-y-3">
-      <!-- Categories Bar with Smart Scroll -->
-      <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 px-1 scroll-smooth" id="categories-bar">
-        <button onclick="switchCategory('all', this)" data-cat="all" class="cat-btn active px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm text-white" style="background-color: #374151;">
-          الكل
-        </button>
-        <button onclick="switchCategory('aqidah', this)" data-cat="aqidah" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
-          العقيدة
-        </button>
-        <button onclick="switchCategory('ilhad', this)" data-cat="ilhad" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
-          الإلحاد
-        </button>
-        <button onclick="switchCategory('shia', this)" data-cat="shia" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
-          الشيعة
-        </button>
-        <button onclick="switchCategory('adyan', this)" data-cat="adyan" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
-          الأديان
-        </button>
-        <button onclick="switchCategory('makatib', this)" data-cat="makatib" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
-          مکاتب فكرية
-        </button>
-        <button onclick="switchCategory('firaq', this)" data-cat="firaq" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
-          فرق
-        </button>
-        <button onclick="switchCategory('dawah', this)" data-cat="dawah" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
-          دعوة
-        </button>
-      </div>
+    <!-- Filter & Search Bar Section (Sticky right below header) -->
+    <div class="sticky top-[61px] z-40 py-2.5 backdrop-blur-md transition-colors" style="background-color: color-mix(in srgb, var(--bg) 90%, transparent);">
+      <div class="space-y-3">
+        <!-- Categories Bar with Smart Scroll -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 px-1 scroll-smooth" id="categories-bar">
+          <button onclick="switchCategory('all', this)" data-cat="all" class="cat-btn active px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm text-white" style="background-color: #374151;">
+            الكل
+          </button>
+          <button onclick="switchCategory('aqidah', this)" data-cat="aqidah" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm border" style="background-color: var(--card); border-color: var(--border); color: var(--gray);">
+            العقيدة
+          </button>
+          <button onclick="switchCategory('ilhad', this)" data-cat="ilhad" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm border" style="background-color: var(--card); border-color: var(--border); color: var(--gray);">
+            الإلحاد
+          </button>
+          <button onclick="switchCategory('shia', this)" data-cat="shia" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm border" style="background-color: var(--card); border-color: var(--border); color: var(--gray);">
+            الشيعة
+          </button>
+          <button onclick="switchCategory('adyan', this)" data-cat="adyan" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm border" style="background-color: var(--card); border-color: var(--border); color: var(--gray);">
+            الأديان
+          </button>
+          <button onclick="switchCategory('makatib', this)" data-cat="makatib" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm border" style="background-color: var(--card); border-color: var(--border); color: var(--gray);">
+            مکاتب فكرية
+          </button>
+          <button onclick="switchCategory('firaq', this)" data-cat="firaq" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm border" style="background-color: var(--card); border-color: var(--border); color: var(--gray);">
+            فرق
+          </button>
+          <button onclick="switchCategory('dawah', this)" data-cat="dawah" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm border" style="background-color: var(--card); border-color: var(--border); color: var(--gray);">
+            دعوة
+          </button>
+        </div>
 
-      <!-- Live Search Input Box (Without Icon) -->
-      <div class="relative">
-        <input type="text" id="search-input" oninput="filterBooks()" placeholder="ابحث عن كتاب أو مؤلف..." 
-               class="w-full px-4 py-2.5 rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-100 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500 transition">
+        <!-- Live Search Input Box -->
+        <div class="relative">
+          <input type="text" id="search-input" oninput="filterBooks()" placeholder="ابحث عن كتاب أو مؤلف..." 
+                 class="w-full px-4 py-3 rounded-2xl border text-sm transition focus:outline-none shadow-sm"
+                 style="background-color: var(--card); border-color: var(--border); color: var(--text);">
+        </div>
       </div>
     </div>
 
     <!-- Books Container -->
-    <div id="books-list" class="space-y-6">
-      <div class="text-center py-10 text-zinc-400 text-sm">جاري التحميل...</div>
+    <div id="books-list" class="space-y-6 pt-2">
+      <div class="text-center py-10 text-sm animate-pulse" style="color: var(--gray);">جاري التحميل...</div>
     </div>
 
   </main>

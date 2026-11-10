@@ -1,39 +1,122 @@
-/* تنظیمات فونت و استایل پایه */
-body {
-  font-family: 'Vazirmatn', sans-serif;
-  background-color: var(--tg-theme-bg-color, #f8f6f0);
-  color: var(--tg-theme-text-color, #2b2b2b);
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap');
+  font-display: swap;
 }
 
-/* تم‌های رنگی اختصاصی برای دسته‌ها و دکمه‌ها */
-.cat-all    { --primary: #374151; --badge-bg: #f3f4f6; --badge-text: #374151; --badge-border: #d1d5db; }
-.cat-aqidah  { --primary: #8b0000; --badge-bg: #fdf2f2; --badge-text: #8b0000; --badge-border: #f8b4b4; }
-.cat-ilhad   { --primary: #1e3a8a; --badge-bg: #eff6ff; --badge-text: #1e3a8a; --badge-border: #bfdbfe; }
-.cat-shia    { --primary: #064e3b; --badge-bg: #ecfdf5; --badge-text: #064e3b; --badge-border: #a7f3d0; }
-.cat-adyan   { --primary: #78350f; --badge-bg: #fffbe6; --badge-text: #78350f; --badge-border: #fde68a; }
-.cat-makatib { --primary: #4c1d95; --badge-bg: #f5f3ff; --badge-text: #4c1d95; --badge-border: #ddd6fe; }
-.cat-firaq   { --primary: #831843; --badge-bg: #fdf2f8; --badge-text: #831843; --badge-border: #fbcfe8; }
-.cat-dawah   { --primary: #14532d; --badge-bg: #f0fdf4; --badge-text: #14532d; --badge-border: #bbf7d0; }
+:root {
+  --bg: #FAF5EC;
+  --card: #FFFDF8;
+  --text: #3E2F23;
+  --gray: #8A7B6B;
+  --border: #E5DCCB;
+  --accent: #B0651F;
+  --header-bg: rgba(250, 245, 236, 0.85);
+  --input-bg: #FFFDF8;
+}
+
+.dark {
+  --bg: #1A1510;
+  --card: #24201A;
+  --text: #F1E7D5;
+  --gray: #B3A58F;
+  --border: #3D3629;
+  --accent: #E0A458;
+  --header-bg: rgba(26, 21, 16, 0.85);
+  --input-bg: #24201A;
+}
+
+html.theme-anim,
+html.theme-anim *,
+html.theme-anim *::before,
+html.theme-anim *::after {
+  transition: background-color .45s ease, background .45s ease, border-color .45s ease, color .45s ease, fill .45s ease, stroke .45s ease !important;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Vazirmatn', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.45s ease, color 0.45s ease;
+}
+
+.cat-all    { --primary: #374151; --badge-bg: rgba(55, 65, 81, 0.1); --badge-text: #374151; --badge-border: rgba(55, 65, 81, 0.2); }
+.cat-aqidah  { --primary: #8b0000; --badge-bg: rgba(139, 0, 0, 0.1); --badge-text: #8b0000; --badge-border: rgba(139, 0, 0, 0.2); }
+.cat-ilhad   { --primary: #1e3a8a; --badge-bg: rgba(30, 58, 138, 0.1); --badge-text: #1e3a8a; --badge-border: rgba(30, 58, 138, 0.2); }
+.cat-shia    { --primary: #064e3b; --badge-bg: rgba(6, 78, 59, 0.1); --badge-text: #064e3b; --badge-border: rgba(6, 78, 59, 0.2); }
+.cat-adyan   { --primary: #78350f; --badge-bg: rgba(120, 53, 15, 0.1); --badge-text: #78350f; --badge-border: rgba(120, 53, 15, 0.2); }
+.cat-makatib { --primary: #4c1d95; --badge-bg: rgba(76, 29, 149, 0.1); --badge-text: #4c1d95; --badge-border: rgba(76, 29, 149, 0.2); }
+.cat-firaq   { --primary: #831843; --badge-bg: rgba(131, 24, 67, 0.1); --badge-text: #831843; --badge-border: rgba(131, 24, 67, 0.2); }
+.cat-dawah   { --primary: #14532d; --badge-bg: rgba(20, 83, 45, 0.1); --badge-text: #14532d; --badge-border: rgba(20, 83, 45, 0.2); }
+
+.dark .cat-all    { --badge-bg: rgba(243, 244, 246, 0.1); --badge-text: #e5e7eb; --badge-border: rgba(243, 244, 246, 0.2); }
+.dark .cat-aqidah  { --badge-bg: rgba(254, 202, 202, 0.1); --badge-text: #fca5a5; --badge-border: rgba(254, 202, 202, 0.2); }
+.dark .cat-ilhad   { --badge-bg: rgba(191, 219, 254, 0.1); --badge-text: #93c5fd; --badge-border: rgba(191, 219, 254, 0.2); }
+.dark .cat-shia    { --badge-bg: rgba(167, 243, 208, 0.1); --badge-text: #6ee7b7; --badge-border: rgba(167, 243, 208, 0.2); }
+.dark .cat-adyan   { --badge-bg: rgba(253, 230, 138, 0.1); --badge-text: #fde047; --badge-border: rgba(253, 230, 138, 0.2); }
+.dark .cat-makatib { --badge-bg: rgba(221, 214, 254, 0.1); --badge-text: #c4b5fd; --badge-border: rgba(221, 214, 254, 0.2); }
+.dark .cat-firaq   { --badge-bg: rgba(251, 207, 232, 0.1); --badge-text: #f472b6; --badge-border: rgba(251, 207, 232, 0.2); }
+.dark .cat-dawah   { --badge-bg: rgba(187, 247, 208, 0.1); --badge-text: #86efac; --badge-border: rgba(187, 247, 208, 0.2); }
 
 .book-card {
-  border-radius: 24px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  background-color: var(--tg-theme-secondary-bg-color, #ffffff);
+  border-radius: 22px;
+  border: 1px solid var(--border);
+  background-color: var(--card);
+  transition: background-color 0.45s ease, border-color 0.45s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
 .dashed-line {
-  border-bottom: 1.5px dashed rgba(0, 0, 0, 0.12);
+  border-bottom: 1.5px dashed var(--border);
 }
 
-.dark .dashed-line {
-  border-bottom: 1.5px dashed rgba(255, 255, 255, 0.15);
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.theme-icon-smooth {
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+  transform: rotate(0deg) scale(1);
+  opacity: 1;
 }
 
-/* مخفی کردن اسکرول‌بار در نوار فیلترها و ایجاد اسکرول روان */
-.no-scrollbar::-webkit-scrollbar { 
-  display: none; 
+.theme-icon-smooth.changing {
+  transform: rotate(30deg) scale(0.7);
+  opacity: 0;
 }
-.no-scrollbar { 
-  -ms-overflow-style: none; 
-  scrollbar-width: none; 
+
+.plus-icon {
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.plus-icon.active {
+  transform: rotate(135deg) scale(1.15);
+}
+
+.menu-dropdown {
+  transform-origin: top left;
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.25s;
+}
+.menu-dropdown.menu-hidden {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.95);
+  pointer-events: none;
+  visibility: hidden;
+}
+.menu-dropdown.menu-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+  visibility: visible;
 }
