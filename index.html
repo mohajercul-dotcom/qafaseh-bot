@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>قفسه</title>
+  <!-- Telegram WebApp SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Vazirmatn Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- فایل استایل اختصاصی CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="pb-10 min-h-screen">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border-b border-black/5 px-4 py-3">
+    <div class="max-w-md mx-auto">
+      <h1 class="text-xl font-bold text-center text-zinc-800 dark:text-zinc-100">قفسه</h1>
+    </div>
+  </header>
+
+  <main class="max-w-md mx-auto px-4 mt-4 space-y-4">
+    
+    <!-- Filter & Search Bar Section -->
+    <div class="space-y-3">
+      <!-- Categories Bar with Smart Scroll -->
+      <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 px-1 scroll-smooth" id="categories-bar">
+        <button onclick="switchCategory('all', this)" data-cat="all" class="cat-btn active px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm text-white" style="background-color: #374151;">
+          الكل
+        </button>
+        <button onclick="switchCategory('aqidah', this)" data-cat="aqidah" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
+          العقيدة
+        </button>
+        <button onclick="switchCategory('ilhad', this)" data-cat="ilhad" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
+          الإلحاد
+        </button>
+        <button onclick="switchCategory('shia', this)" data-cat="shia" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
+          الشيعة
+        </button>
+        <button onclick="switchCategory('adyan', this)" data-cat="adyan" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
+          الأديان
+        </button>
+        <button onclick="switchCategory('makatib', this)" data-cat="makatib" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
+          مکاتب فكرية
+        </button>
+        <button onclick="switchCategory('firaq', this)" data-cat="firaq" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
+          فرق
+        </button>
+        <button onclick="switchCategory('dawah', this)" data-cat="dawah" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
+          دعوة
+        </button>
+      </div>
+
+      <!-- Live Search Input Box (Without Icon) -->
+      <div class="relative">
+        <input type="text" id="search-input" oninput="filterBooks()" placeholder="ابحث عن كتاب أو مؤلف..." 
+               class="w-full px-4 py-2.5 rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-100 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500 transition">
+      </div>
+    </div>
+
+    <!-- Books Container -->
+    <div id="books-list" class="space-y-6">
+      <div class="text-center py-10 text-zinc-400 text-sm">جاري التحميل...</div>
+    </div>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

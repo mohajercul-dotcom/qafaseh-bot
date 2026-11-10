@@ -1,0 +1,39 @@
+/* تنظیمات فونت و استایل پایه */
+body {
+  font-family: 'Vazirmatn', sans-serif;
+  background-color: var(--tg-theme-bg-color, #f8f6f0);
+  color: var(--tg-theme-text-color, #2b2b2b);
+}
+
+/* تم‌های رنگی اختصاصی برای دسته‌ها و دکمه‌ها */
+.cat-all    { --primary: #374151; --badge-bg: #f3f4f6; --badge-text: #374151; --badge-border: #d1d5db; }
+.cat-aqidah  { --primary: #8b0000; --badge-bg: #fdf2f2; --badge-text: #8b0000; --badge-border: #f8b4b4; }
+.cat-ilhad   { --primary: #1e3a8a; --badge-bg: #eff6ff; --badge-text: #1e3a8a; --badge-border: #bfdbfe; }
+.cat-shia    { --primary: #064e3b; --badge-bg: #ecfdf5; --badge-text: #064e3b; --badge-border: #a7f3d0; }
+.cat-adyan   { --primary: #78350f; --badge-bg: #fffbe6; --badge-text: #78350f; --badge-border: #fde68a; }
+.cat-makatib { --primary: #4c1d95; --badge-bg: #f5f3ff; --badge-text: #4c1d95; --badge-border: #ddd6fe; }
+.cat-firaq   { --primary: #831843; --badge-bg: #fdf2f8; --badge-text: #831843; --badge-border: #fbcfe8; }
+.cat-dawah   { --primary: #14532d; --badge-bg: #f0fdf4; --badge-text: #14532d; --badge-border: #bbf7d0; }
+
+.book-card {
+  border-radius: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background-color: var(--tg-theme-secondary-bg-color, #ffffff);
+}
+
+.dashed-line {
+  border-bottom: 1.5px dashed rgba(0, 0, 0, 0.12);
+}
+
+.dark .dashed-line {
+  border-bottom: 1.5px dashed rgba(255, 255, 255, 0.15);
+}
+
+/* مخفی کردن اسکرول‌بار در نوار فیلترها و ایجاد اسکرول روان */
+.no-scrollbar::-webkit-scrollbar { 
+  display: none; 
+}
+.no-scrollbar { 
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
